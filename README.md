@@ -8,4 +8,4 @@ For more info see
 
 For 1.2/1.3 use the .js and .ui file
 For 2.x use the _for2.x.qml file
-For 3.x use the normal .qml file
+For 3.x use the -jt.qml file (to avoid naming conflicts with the built-in version
