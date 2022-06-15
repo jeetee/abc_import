@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Abc 2 xml calls a webservice at http://abc2xml.appspot.com to convert
+//  Abc 2 xml calls a webservice at http://musescore.jeetee.net/abc to convert
 //  an abc tune to MusicXML and open it with MuseScore for further editing
 //
 //  Copyright (C)2008 Werner Schweer and others
@@ -109,7 +109,7 @@ function accept()
 
 		//print(encodedContent);
 
-		var url = "/abcrenderer";
+		var url = "/abc/abc2xml.py";
 		encodedContent = "content=" + encodedContent;
 		
 		var content = new QByteArray();
@@ -122,7 +122,7 @@ function accept()
 		outFile = new QTemporaryFile(QDir.tempPath()+"/abc_XXXXXX.xml");
 		outFile.open();
 		http = new QHttp();
-		http.setHost("abc2xml.appspot.com", 80);
+		http.setHost("musescore.jeetee.net", 80);
 		http.requestFinished.connect(outFile,finished);
 		reqId = http.post(url, buffer, outFile);
     }
@@ -134,7 +134,7 @@ function accept()
 function errorMessage(){
       mb = new QMessageBox();
       mb.setWindowTitle("Error: abc2xml conversion");
-      mb.text = "An error ("+ http.error() + ") occured during the conversion.<br />Try it manually at: <a href=\"http://abc2xml.appspot.com\">http://abc2xml.appspot.com</a>";
+      mb.text = "An error ("+ http.error() + ") occured during the conversion.";
       mb.exec();
 }
 
