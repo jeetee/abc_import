@@ -26,7 +26,7 @@ import FileIO 3.0
 
 MuseScore {
     menuPath: "Plugins.ABC Import (jt)"
-    version: "3.0.2"
+    version: "3.0.3"
     description: qsTr("This plugin imports ABC text from a file or the clipboard. Internet connection is required.")
     requiresScore: false
     pluginType: "dialog"
@@ -119,6 +119,7 @@ MuseScore {
                 if (request.readyState == XMLHttpRequest.DONE) {
                     var response = request.responseText
                     //console.log("responseText : " + response)
+					myFile.source = myFile.tempPath() + "//" + (Date.now()) + ".xml";
                     myFile.write(response)
                     readScore(myFile.source)
                     pluginDialog.parent.Window.window.close();
