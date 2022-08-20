@@ -59,7 +59,7 @@ var http;
 function run()
       {
       var loader = new QUiLoader(null);
-		  var file   = new QFile(pluginPath + "/abc_import.ui");
+		  var file   = new QFile(pluginPath + "/abc_import_jt.ui");
 		  file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
 		  form = loader.load(file, null);
 		  form.buttonBox.accepted.connect(accept);
@@ -178,7 +178,7 @@ QByteArray.prototype.toString = function()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.ABC Import',
+      menu: 'Plugins.ABC Import (jt)',
       init: init,
       run:  run
       };
