@@ -119,7 +119,7 @@ MuseScore {
                 if (request.readyState == XMLHttpRequest.DONE) {
                     var response = request.responseText
                     //console.log("responseText : " + response)
-                    myFile.source = myFile.tempPath() + "//" + (Date.now()) + ".xml";
+                    myFile.source = myFile.tempPath() + "/" + (Date.now()) + ".xml";
                     myFile.write(response)
                     readScore(myFile.source)
                     pluginDialog.parent.Window.window.close();
@@ -139,7 +139,7 @@ MuseScore {
         anchors.topMargin: 10
         anchors.bottomMargin: 10
         onClicked: {
-                pluginDialog.parent.Window.window.close();
+            pluginDialog.parent.Window.window.close();
             }
         }
     }
