@@ -24,8 +24,8 @@ import MuseScore 1.0
 import FileIO 1.0
 
 MuseScore {
-    menuPath: "Plugins.ABC Import"
-    version: "2.0"
+    menuPath: "Plugins.ABC Import (jt)"
+    version: "2.0.1"
     description: qsTr("This plugin imports et converts ABC text from a file or the clipboard.")
     pluginType: "dialog"
 
@@ -123,7 +123,7 @@ MuseScore {
                         Qt.quit()
                     }
                 }
-            request.open("POST", "https://musescore.jeetee.net/abc/abc2xml.py", true)
+            request.open("POST", "http://musescore.jeetee.net/abc/abc2xml.py", true)
             request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
             request.send(content)
             }
