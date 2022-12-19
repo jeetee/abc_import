@@ -33,6 +33,12 @@ MuseScore {
 
     id: pluginDialog
     width: 800; height: 500;
+    Component.onCompleted : {
+        if (mscoreMajorVersion >= 4) {
+            pluginDialog.title = "ABC Import (jt)";
+        }
+    }
+
     onRun: {}
 
     FileIO {
