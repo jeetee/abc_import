@@ -25,14 +25,18 @@ import MuseScore 3.0
 import FileIO 3.0
 
 MuseScore {
-    menuPath: "Plugins.ABC Import (jt)"
-    version: "3.0.3"
+    menuPath: "Plugins.ABC Import"
+    title: "ABC Import"
+    version: "4.0.0"
     description: qsTr("This plugin imports ABC text from a file or the clipboard. Internet connection is required.")
+    thumbnailName: "abc-import.png"
+    categoryCode: "import"
     requiresScore: false
     pluginType: "dialog"
 
     id: pluginDialog
     width: 800; height: 500;
+
     onRun: {}
 
     FileIO {
@@ -78,7 +82,7 @@ MuseScore {
         anchors.top: textLabel.bottom
         anchors.left: pluginDialog.left
         anchors.right: pluginDialog.right
-        anchors.bottom: buttonOpenFile.top
+        anchors.bottom: convertedStorageLocationLabel.top
         anchors.topMargin: 10
         anchors.bottomMargin: 10
         anchors.leftMargin: 10
@@ -87,6 +91,23 @@ MuseScore {
         height:400
         wrapMode: TextEdit.WrapAnywhere
         textFormat: TextEdit.PlainText
+        }
+
+    TextField {
+        id: convertedStorageLocationLabel
+        text: ""
+        //font.pointSize:12
+        anchors.top: abcText.bottom
+        anchors.left: pluginDialog.left
+        anchors.right: pluginDialog.right
+        anchors.bottom: buttonOpenFile.top
+        anchors.topMargin: 10
+        anchors.leftMargin: 10
+        anchors.rightMargin: 10
+        anchors.bottomMargin: 10
+        readOnly: true
+        //selectByKeyboard: true
+        //selectByMouse: true
         }
 
     Button {
@@ -119,9 +140,14 @@ MuseScore {
                 if (request.readyState == XMLHttpRequest.DONE) {
                     var response = request.responseText
                     //console.log("responseText : " + response)
-                    myFile.source = myFile.tempPath() + "//" + (Date.now()) + ".xml";
-                    myFile.write(response)
-                    readScore(myFile.source)
+                    myFile.source = myFile.tempPath() + "/" + (Date.now()) + ".xml";
+                    myFile.write(response);
+                    //readScore(myFile.source) // Not yet supported in 4.0.0
+                    convertedStorageLocationLabel.text = myFile.source;
+                    convertedStorageLocationLabel.selectAll();
+                    convertedStorageLocationLabel.copy();
+                    convertedStorageLocationLabel.deselect();
+                    cmd("file-open");
                     pluginDialog.parent.Window.window.close();
                     }
                 }
@@ -138,6 +164,7 @@ MuseScore {
         anchors.right: buttonConvert.left
         anchors.topMargin: 10
         anchors.bottomMargin: 10
+        anchors.rightMargin: 10
         onClicked: {
                 pluginDialog.parent.Window.window.close();
             }
